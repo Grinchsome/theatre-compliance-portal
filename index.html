@@ -761,10 +761,10 @@ const complianceRules = {
         { id: "integrated_lifting_system", name: "Integrated Lifting System", category: "Lifting Equipment", classId: "powered_lifting_machine",
           description: "Integrated lifting or flying system, such as a motorised bar or multi-axis stage machinery.", image: "images/integrated_lifting_system.webp" },
 
-        { id: "internally_wired_bar", name: "Internally Wired Bar (lifting equipment)", category: "Lifting Equipment", classId: "structural_support",
+        { id: "internally_wired_bar", name: "Internally Wired Bar", category: "Lifting Equipment", classId: "structural_support",
           description: "Internally wired bar treated as part of a lifting system, supporting loads and power.", image: "images/internally_wired_bar.webp" },
 
-        { id: "lighting_bar_grid", name: "Lighting Bar Grid (lifting equipment)", category: "Lifting Equipment", classId: "structural_support",
+        { id: "lighting_bar_grid", name: "Lighting Bar Grid", category: "Lifting Equipment", classId: "structural_support",
           description: "A grid of lighting bars used as a structural support for loads.", image: "images/lighting_bar_grid.webp" },
 
         { id: "unibar_system", name: "Unibar system", category: "Lifting Equipment", classId: "powered_lifting_machine",
@@ -792,11 +792,24 @@ const complianceRules = {
         { id: "web_slings", name: "Web Slings", category: "Accessory", classId: "lifting_accessory",
           description: "Flat webbing slings used to support or lift loads.", image: "images/web_slings.webp" },
 
-        { id: "shackles", name: "Shackles", category: "Accessory", classId: "lifting_accessory",
-          description: "Shackles used as connecting elements in lifting assemblies.", image: "images/shackles.webp" },
-
-        { id: "coupler", name: "Coupler", category: "Accessory", classId: "lifting_accessory",
-          description: "Coupler used to connect tubes, truss or bars in rigging systems.", image: "images/coupler.webp" },
+        {
+  id: "bow_shackles",
+  name: "Bow Shackles",
+  category: "Accessory",
+  classId: "lifting_accessory",
+  description: "Bow shackles used as connecting elements in lifting assemblies, typically where multiple sling legs or wider connections are required.",
+  image: "images/bow_shackles.webp"
+},
+{
+  id: "dee_shackles",
+  name: "Dee Shackles",
+  category: "Accessory",
+  classId: "lifting_accessory",
+  description: "Dee shackles used as connecting elements in lifting assemblies, typically for straight-line loading applications.",
+  image: "images/dee_shackles.webp"
+},
+        { id: "half_coupler", name: "Half Coupler", category: "Accessory", classId: "lifting_accessory",
+          description: "Half Coupler used to connect tubes, truss or bars in rigging systems.", image: "images/half_coupler.webp" },
 
         { id: "ceiling_saddle", name: "Ceiling Saddle", category: "Accessory", classId: "lifting_accessory",
           description: "Ceiling saddle used to support bars or pipes from structural members.", image: "images/ceiling_saddle.webp" },
