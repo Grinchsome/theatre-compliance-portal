@@ -218,6 +218,10 @@
   .badge.loler{ background:var(--badgeLolerBg); color:var(--badgeLolerText); }
   .badge.puwer{ background:var(--badgePuwerBg); color:var(--badgePuwerText); }
   .badge.bs{ background:var(--badgeBsBg); color:var(--badgeBsText); }
+.badge.abtt{
+  background:#5b3a82;
+  color:#ffffff;
+}
 
   .outlined{
     border:1px solid var(--border);
@@ -294,6 +298,41 @@
 .equipment-image:hover {
   transform: scale(1.02);
 }
+/* Equipment gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.gallery-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.7rem;
+  background: var(--surface);
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 110px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.gallery-card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
 </style>
 
 </head>
@@ -320,6 +359,16 @@
     scheme of examination, manufacturer documentation, or advice from a competent person.
   </p>
 
+<div class="card">
+  <div class="card">
+  <button id="galleryToggle" class="secondary">📷 Show equipment gallery</button>
+
+  <div id="gallerySection" style="display:none;">
+    <h3>Equipment gallery</h3>
+    <p class="muted">Tap an image to open that equipment.</p>
+    <div id="equipmentGallery" class="gallery"></div>
+  </div>
+</div>
   <div class="card">
     <h3>1. Select equipment</h3>
     <label>
@@ -469,30 +518,41 @@ const PLACEHOLDER_IMAGE = "images/placeholder.webp";
  * RULES (full equipment list retained)
  ****************************************************/
 const complianceRules = {
-      regulations: {
-        LOLER_1998: {
-          code: "LOLER 1998",
-          name: "Lifting Operations and Lifting Equipment Regulations 1998",
-          type: "Regulation",
-          region: "UK"
-        },
-        PUWER_1998: {
-          code: "PUWER 1998",
-          name: "Provision and Use of Work Equipment Regulations 1998",
-          type: "Regulation",
-          region: "UK"
-        },
-        BS_EN_17206_2020: {
-          code: "BS EN 17206:2020",
-          name: "Entertainment technology — Machinery for stages and other production areas",
-          type: "Standard",
-          region: "UK / EU"
-        }
-      },
+  regulations: {
 
-      /****************************************************
-       * EQUIPMENT CLASSES – shared rules and education
-       ****************************************************/
+    LOLER_1998: {
+      code: "LOLER 1998",
+      name: "Lifting Operations and Lifting Equipment Regulations 1998",
+      type: "Regulation",
+      region: "UK"
+    },
+
+    PUWER_1998: {
+      code: "PUWER 1998",
+      name: "Provision and Use of Work Equipment Regulations 1998",
+      type: "Regulation",
+      region: "UK"
+    },
+
+    BS_EN_17206_2020: {
+      code: "BS EN 17206:2020",
+      name: "Entertainment technology — Machinery for stages and other production areas",
+      type: "Standard",
+      region: "UK / EU"
+    },
+
+    ABTT_TECHNICAL_STANDARDS: {
+      code: "ABTT Technical Standards",
+      name: "Technical Standards for Places of Entertainment",
+      type: "Industry Guidance / Good Practice",
+      region: "UK"
+    }
+
+  },
+
+  /****************************************************
+   * EQUIPMENT CLASSES – shared rules and education
+   ****************************************************/
       equipmentClasses: [
         {
           id: "powered_lifting_machine",
@@ -662,42 +722,57 @@ const complianceRules = {
         },
 
         {
-          id: "curtain_track",
-          name: "Curtain tracks and studio rails",
-          description: "Track systems that support and move soft goods such as curtains, cloths or light scenery.",
-          regulationRules: [
-            {
-              regulationId: "LOLER_1998",
-              appliesIf: [ { field: "context.usedToSuspendLoads", operator: "equals", value: true } ],
-              appliesResult: "conditional",
-              notes: "Where the track supports or moves loads that could create significant risk if they fell, LOLER principles on strength, stability and examination become relevant.",
-              education: [
-                { part: "Regulation 4 – Strength and stability", summary: "Fixings, supports and the track itself must be strong enough for the loads, travel and impact loads expected." },
-                { part: "Regulation 9 – Examination and inspection", summary: "Where a track carries significant loads, a competent person may need to include it in a scheme of examination." }
-              ]
-            },
-            {
-              regulationId: "PUWER_1998",
-              appliesIf: [],
-              appliesResult: "always",
-              notes: "Curtain tracks and studio rails used at work are work equipment and must comply with PUWER.",
-              education: [
-                { part: "Regulation 4 – Suitability", summary: "The track must be suitable for the type of curtain, cloth or load, including any curved or overlapped sections." },
-                { part: "Regulation 5 – Maintenance", summary: "Trolleys, carriers and fixings must be maintained to avoid jamming, derailing or failure." }
-              ]
-            },
-            {
-              regulationId: "BS_EN_17206_2020",
-              appliesIf: [],
-              appliesResult: "always",
-              notes: "When curtain tracks form part of an entertainment machinery system, they fall under BS EN 17206 requirements for load bearing and moving components.",
-              education: [
-                { part: "Load paths and interfaces", summary: "Tracks, carriers and fixings are part of the load path and must be compatible with the rest of the system." }
-              ]
-            }
-          ]
+  id: "curtain_track",
+  name: "Curtain tracks and studio rails",
+  description: "Track systems that support and move soft goods such as curtains, cloths or light scenery.",
+  regulationRules: [
+    {
+      regulationId: "LOLER_1998",
+      appliesIf: [ { field: "context.usedToSuspendLoads", operator: "equals", value: true } ],
+      appliesResult: "conditional",
+      notes: "Where the track supports or moves loads that could create significant risk if they fell, LOLER principles on strength, stability and examination become relevant.",
+      education: [
+        { part: "Regulation 4 – Strength and stability", summary: "Fixings, supports and the track itself must be strong enough for the loads, travel and impact loads expected." },
+        { part: "Regulation 9 – Examination and inspection", summary: "Where a track carries significant loads, a competent person may need to include it in a scheme of examination." }
+      ]
+    },
+    {
+      regulationId: "PUWER_1998",
+      appliesIf: [],
+      appliesResult: "always",
+      notes: "Curtain tracks and studio rails used at work are work equipment and must comply with PUWER.",
+      education: [
+        { part: "Regulation 4 – Suitability", summary: "The track must be suitable for the type of curtain, cloth or load, including any curved or overlapped sections." },
+        { part: "Regulation 5 – Maintenance", summary: "Trolleys, carriers and fixings must be maintained to avoid jamming, derailing or failure." }
+      ]
+    },
+    {
+      regulationId: "BS_EN_17206_2020",
+      appliesIf: [],
+      appliesResult: "always",
+      notes: "When curtain tracks form part of an entertainment machinery system, they fall under BS EN 17206 requirements for load bearing and moving components.",
+      education: [
+        { part: "Load paths and interfaces", summary: "Tracks, carriers and fixings are part of the load path and must be compatible with the rest of the system." }
+      ]
+    },
+    {
+      regulationId: "ABTT_TECHNICAL_STANDARDS",
+      appliesIf: [],
+      appliesResult: "always",
+      notes: "ABTT Technical Standards provide recognised UK theatre-industry good practice for the installation, inspection, maintenance and operation of entertainment equipment.",
+      education: [
+        {
+          part: "Industry good practice",
+          summary: "Equipment should be installed, maintained and inspected by competent persons familiar with theatre and entertainment environments."
         },
-
+        {
+          part: "Inspection and maintenance",
+          summary: "Inspection frequencies, record keeping and maintenance procedures should follow recognised entertainment industry practice."
+        }
+      ]
+    }
+  ]
+},
         {
           id: "general_support",
           name: "General supports and brackets",
@@ -1029,8 +1104,7 @@ function evaluateCompliance(equipmentId, context) {
 
   eqClass.regulationRules.forEach(function (rule) {
     var reg = getRegulationById(rule.regulationId);
-    if (!reg) return;
-
+if (!reg) return;
     var applies = "not_applicable";
     if (!rule.appliesIf || rule.appliesIf.length === 0) {
       applies = rule.appliesResult;
@@ -1062,7 +1136,58 @@ var equipmentSelect = document.getElementById("equipmentSelect");
 var searchInput = document.getElementById("searchInput");
 var checkButton = document.getElementById("checkButton");
 var resultsDiv = document.getElementById("results");
+var equipmentGallery = document.getElementById("equipmentGallery");
+var galleryToggle = document.getElementById("galleryToggle");
+var gallerySection = document.getElementById("gallerySection");
 
+galleryToggle.addEventListener("click", function () {
+  var isHidden = gallerySection.style.display === "none";
+  gallerySection.style.display = isHidden ? "block" : "none";
+  galleryToggle.textContent = isHidden ? "📷 Hide equipment gallery" : "📷 Show equipment gallery";
+});
+
+// Build visual equipment gallery
+function buildEquipmentGallery() {
+  if (!equipmentGallery) return;
+
+  equipmentGallery.innerHTML = "";
+
+  complianceRules.equipmentTypes.forEach(function (item) {
+    var card = document.createElement("div");
+    card.className = "gallery-card";
+
+    var img = document.createElement("img");
+    img.src = item.image || PLACEHOLDER_IMAGE;
+    img.alt = item.name;
+    img.onerror = function () {
+  if (img.src.indexOf("placeholder.webp") === -1) {
+    img.src = PLACEHOLDER_IMAGE;
+  }
+};
+
+    var title = document.createElement("div");
+    title.className = "gallery-card-title";
+    title.textContent = item.name;
+
+    card.appendChild(img);
+    card.appendChild(title);
+
+    card.addEventListener("click", function () {
+      equipmentSelect.value = item.id;
+      checkButton.click();
+
+      // Scroll to the result
+      document.getElementById("results").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+
+    equipmentGallery.appendChild(card);
+  });
+}
+
+buildEquipmentGallery();
 // Search filter
 searchInput.addEventListener("input", function () {
   var term = this.value.toLowerCase();
@@ -1100,11 +1225,13 @@ function regBadgeClass(regId){
   if (regId.indexOf("LOLER") === 0) return "loler";
   if (regId.indexOf("PUWER") === 0) return "puwer";
   if (regId.indexOf("BS_") === 0) return "bs";
+if (regId.indexOf("ABTT") === 0) return "abtt";
   return "";
 }
 function regBadgeText(regId){
   if (regId.indexOf("BS_") === 0) return "BS EN";
   if (regId.indexOf("PUWER") === 0) return "PUWER";
+  if (regId.indexOf("ABTT") === 0) return "ABTT";
   return "LOLER";
 }
 
