@@ -961,19 +961,20 @@ const complianceRules = {
           description: "Doughty Six curtain track system for soft goods.", image: "images/doughty_six_curtain_track.webp" },
 
         { id: "doughty_six_overlap_curtain_track", name: "Doughty Six overlap curtain track", category: "Curtain Track", classId: "curtain_track",
-          description: "Doughty Six overlap track with overlapping curtains.", image: "images/doughty_six_overlap_curtain_track.webp" },
+          description: "Doughty Six overlap track with overlapping curtains.", image: "images/doughty_six_overlap_curtain_track.webp", hideFromGallery: true },
 
         { id: "doughty_rail_curtain_track", name: "Doughty Rail curtain track", category: "Curtain Track", classId: "curtain_track",
           description: "Doughty Rail curtain track system.", image: "images/doughty_rail_curtain_track.webp" },
 
         { id: "doughty_rail_overlap_curtain_track", name: "Doughty Rail overlap curtain track", category: "Curtain Track", classId: "curtain_track",
-          description: "Doughty Rail overlap curtain track system.", image: "images/doughty_rail_overlap_curtain_track.webp" },
+          description: "Doughty Rail overlap curtain track system.", image: "images/doughty_rail_overlap_curtain_track.webp", hideFromGallery: true },
 
         { id: "hall_t400_curtain_track", name: "Hall Stage T400 curtain track", category: "Curtain Track", classId: "curtain_track",
           description: "Hall Stage T400 curtain track system.", image: "images/hall_t400_curtain_track.webp" },
 
         { id: "hall_t400_overlap_curtain_track", name: "Hall Stage T400 overlap curtain track", category: "Curtain Track", classId: "curtain_track",
-          description: "Hall Stage T400 overlap curtain track.", image: "images/hall_t400_overlap_curtain_track.webp" },
+          description: "Hall Stage T400 overlap curtain track.", image: "images/hall_t400_overlap_curtain_track.webp",
+  hideFromGallery: true },
 
         { id: "hall_t60_curtain_track", name: "Hall Stage T60 curtain track", category: "Curtain Track", classId: "curtain_track",
           description: "Hall Stage T60 curtain track system.", image: "images/hall_t60_curtain_track.webp",
@@ -1005,7 +1006,8 @@ const complianceRules = {
         },
 
         { id: "hall_t60_overlap_curtain_track", name: "Hall Stage T60 overlap curtain track", category: "Curtain Track", classId: "curtain_track",
-          description: "Hall Stage T60 overlap curtain track.", image: "images/hall_t60_overlap_curtain_track.webp" },
+          description: "Hall Stage T60 overlap curtain track.", image: "images/hall_t60_overlap_curtain_track.webp",
+  hideFromGallery: true },
 
         { id: "triple_e_2way_curtain_track", name: "Triple E 2-way curtain track", category: "Curtain Track", classId: "curtain_track",
           description: "Triple E 2-way curtain track system.", image: "images/triple_e_2way_curtain_track.webp" },
@@ -1149,6 +1151,8 @@ function buildEquipmentGallery() {
   equipmentGallery.innerHTML = "";
 
   complianceRules.equipmentTypes.forEach(function (item) {
+    if (item.hideFromGallery) return;
+    
     var card = document.createElement("div");
     card.className = "gallery-card";
 
