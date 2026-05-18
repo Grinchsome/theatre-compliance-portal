@@ -403,6 +403,7 @@
           <option value="web_slings">Web Slings</option>
           <option value="bow_shackles">Bow Shackles</option>
           <option value="dee_shackles">Dee Shackles</option>
+          <option value="safety_bow_shackles">Safety Bow Shackles</option>
           <option value="half_coupler"> Half Coupler</option>
           <option value="ceiling_saddle">Ceiling Saddle</option>        
           <option value="pipe_hanging_clamp">Pipe Hanging Clamp</option>
@@ -879,6 +880,29 @@ const complianceRules = {
   classId: "lifting_accessory",
   description: "Dee shackles used as connecting elements in lifting assemblies, typically for straight-line loading applications.",
   image: "images/dee_shackles.webp"
+},
+        {
+  id: "safety_bow_shackles",
+  name: "Safety Bow Shackles",
+  category: "Accessory",
+  classId: "lifting_accessory",
+
+  description: "Safety bow shackles used in entertainment rigging and suspension systems.",
+
+  image: "images/safety_bow_shackles.webp",
+
+  equipmentInfo: [
+    "Only rated shackles with identifiable markings should be used.",
+    "SWL/WLL markings must remain legible.",
+    "Pins must be correctly secured."
+  ],
+
+  whatToCheck: [
+    "No deformation or thread damage.",
+    "Correct pin fitted.",
+    "Markings legible.",
+    "No excessive corrosion."
+  ]
 },
         { id: "half_coupler", name: "Half Coupler", category: "Accessory", classId: "lifting_accessory",
           description: "Half Coupler used to connect tubes, truss or bars in rigging systems.", image: "images/half_coupler.webp" },
