@@ -864,6 +864,30 @@ const complianceRules = {
 
         { id: "web_slings", name: "Web Slings", category: "Accessory", classId: "lifting_accessory",
           description: "Flat webbing slings used to support or lift loads.", image: "images/web_slings.webp" },
+        {
+  id: "line_array_suspension",
+  name: "Line Array Suspension",
+  category: "Audio Suspension",
+  classId: "lifting_accessory",
+
+  description: "Suspension systems used to support flown line array loudspeaker systems.",
+
+  image: "images/line_array_suspension.webp",
+
+  equipmentInfo: [
+    "Suspension systems must only be used within manufacturer-rated configurations.",
+    "All flying hardware must be compatible with the loudspeaker system.",
+    "Load calculations should include dynamic loading and array angles."
+  ],
+
+  whatToCheck: [
+    "All locking pins fitted and secured.",
+    "No deformation in flying frames.",
+    "No damage to suspension hardware.",
+    "Manufacturer documentation available.",
+    "Safe Working Load markings legible."
+  ]
+},
 
         {
   id: "bow_shackles",
@@ -968,10 +992,7 @@ const complianceRules = {
 
         // General Equipment
         { id: "gantry", name: "Gantry", category: "General Equipment", classId: "structural_support",
-          description: "Gantry structure used to support lifting machines, truss or loads.", image: "images/gantry.webp" },
-        
-        { id: "line_array_suspension", name: "Line Array Suspension", category: "General Equipment", classId: "general_support",
-          description: "Support or bracket used to suspend speaker stacks.", image: "images/line_array_suspension.webp" },
+          description: "Gantry structure used to support lifting machines, truss or loads.", image: "images/gantry.webp" },    
 
         { id: "pantograph", name: "Pantograph", category: "General Equipment", classId: "general_support",
           description: "Pantograph used to support and position equipment such as luminaires or microphones.", image: "images/pantograph.webp" },
