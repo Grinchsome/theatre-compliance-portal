@@ -354,7 +354,7 @@
   </div>
 
   <p class="muted">
-   This is a guidance aid only, providing a high-level view of how LOLER, PUWER, BS EN 17206 and ABTT Technical Standards
+    This is a guidance aid only, providing a high-level view of how LOLER, PUWER, BS EN 17206 and ABTT Technical Standards
     relate to common theatre equipment.
   </p>
 
@@ -546,6 +546,49 @@ const complianceRules = {
     }
 
   },
+regulationGuides: {
+  LOLER_1998: {
+    title: "Learn more about LOLER",
+    points: [
+      "LOLER applies to lifting equipment and lifting operations used at work.",
+      "It requires lifting operations to be properly planned, supervised and carried out safely.",
+      "Lifting equipment must be strong, stable, suitable and clearly marked with its SWL or WLL.",
+      "Lifting equipment and lifting accessories must be thoroughly examined by a competent person.",
+      "Records of thorough examination should be kept and defects acted on."
+    ]
+  },
+
+  PUWER_1998: {
+    title: "Learn more about PUWER",
+    points: [
+      "PUWER applies to work equipment used at work.",
+      "Equipment must be suitable for its intended use and environment.",
+      "Work equipment must be maintained so it remains safe.",
+      "Where deterioration could create risk, equipment must be inspected at suitable intervals.",
+      "Users must have adequate information, instruction and training."
+    ]
+  },
+
+  BS_EN_17206_2020: {
+    title: "Learn more about BS EN 17206",
+    points: [
+      "BS EN 17206 is the entertainment technology standard for machinery used on stages and production areas.",
+      "It covers safety requirements for lifting and moving equipment used in entertainment environments.",
+      "It includes requirements for load-bearing components, control systems, safety functions and prevention of uncontrolled movement.",
+      "It also supports inspection, testing, commissioning, documentation and competent operation."
+    ]
+  },
+
+  ABTT_TECHNICAL_STANDARDS: {
+    title: "Learn more about ABTT Technical Standards",
+    points: [
+      "ABTT Technical Standards provide recognised UK theatre-industry good practice for places of entertainment.",
+      "They are guidance rather than legislation, but they support safe design, installation, inspection, maintenance and operation.",
+      "They help users understand theatre-specific risks and expected good practice.",
+      "They sit alongside legal duties such as LOLER and PUWER, and technical standards such as BS EN 17206."
+    ]
+  }
+},
 
   /****************************************************
    * EQUIPMENT CLASSES – shared rules and education
@@ -1308,7 +1351,10 @@ function regBadgeText(regId){
   if (regId.indexOf("ABTT") === 0) return "ABTT";
   return "LOLER";
 }
-
+function getRegulationGuide(regId) {
+  if (!complianceRules.regulationGuides) return null;
+  return complianceRules.regulationGuides[regId] || null;
+}
 function displayResult(result) {
   resultsDiv.innerHTML = "";
 
@@ -1435,6 +1481,18 @@ img.addEventListener("click", function () {
     toggle.textContent = "Show details";
     actions.appendChild(toggle);
 
+var guide = getRegulationGuide(r.id);
+
+var learnToggle = null;
+var learnDetails = null;
+
+if (guide) {
+  learnToggle = document.createElement("button");
+  learnToggle.className = "secondary";
+  learnToggle.textContent = "Learn more";
+  actions.appendChild(learnToggle);
+}
+
     head.appendChild(actions);
     block.appendChild(head);
 
@@ -1466,7 +1524,35 @@ img.addEventListener("click", function () {
     });
 
     block.appendChild(details);
-    container.appendChild(block);
+
+if (guide) {
+  learnDetails = document.createElement("div");
+  learnDetails.className = "outlined";
+  learnDetails.style.display = "none";
+
+  var learnTitle = document.createElement("h3");
+  learnTitle.textContent = guide.title;
+  learnTitle.style.marginTop = "0";
+  learnDetails.appendChild(learnTitle);
+
+  var learnList = document.createElement("ul");
+  guide.points.forEach(function (point) {
+    var li = document.createElement("li");
+    li.textContent = point;
+    learnList.appendChild(li);
+  });
+  learnDetails.appendChild(learnList);
+
+  learnToggle.addEventListener("click", function () {
+    var isHidden = learnDetails.style.display === "none";
+    learnDetails.style.display = isHidden ? "block" : "none";
+    learnToggle.textContent = isHidden ? "Hide learn more" : "Learn more";
+  });
+
+  block.appendChild(learnDetails);
+}
+
+container.appendChild(block);
   });
 
   var disclaimer = document.createElement("p");
@@ -1478,7 +1564,17 @@ img.addEventListener("click", function () {
 
  resultsDiv.appendChild(container);
 }
+function toggleInfo(id) {
 
+  var section = document.getElementById(id);
+
+  if (section.style.display === "none" || section.style.display === "") {
+    section.style.display = "block";
+  } else {
+    section.style.display = "none";
+  }
+
+}
 </script>
 
 <!-- IMAGE LIGHTBOX -->
@@ -1492,6 +1588,198 @@ document.getElementById("lightbox").addEventListener("click", function () {
   this.classList.remove("show");
 });
 </script>
+<div class="card">
+  <h3>Regulation information</h3>
 
+<div class="button-row">
+  <button onclick="toggleInfo('lolerInfo')">LOLER</button>
+  <button onclick="toggleInfo('puwerInfo')">PUWER</button>
+  <button onclick="toggleInfo('bsInfo')">BS EN 17206</button>
+  <button onclick="toggleInfo('abttInfo')">ABTT</button>
+</div>
+
+<!-- LOLER -->
+<div id="lolerInfo" class="outlined" style="display:none;">
+
+  <h3>LOLER 1998</h3>
+
+  <p>
+    The Lifting Operations and Lifting Equipment Regulations 1998 (LOLER)
+    apply to lifting equipment and lifting operations used at work.
+  </p>
+
+  <h4>Key theatre applications</h4>
+
+  <ul>
+    <li>Chain hoists</li>
+    <li>Motorised flying systems</li>
+    <li>Lifting beams</li>
+    <li>Truss systems</li>
+    <li>Suspension points</li>
+    <li>Lifting accessories such as shackles and slings</li>
+  </ul>
+
+  <h4>Main requirements</h4>
+
+  <ul>
+    <li>Equipment must be strong and stable.</li>
+    <li>Safe Working Loads must be clearly marked.</li>
+    <li>Lifting operations must be properly planned.</li>
+    <li>Equipment must be thoroughly examined by a competent person.</li>
+    <li>Defects must be recorded and acted upon.</li>
+  </ul>
+
+  <h4>Theatre considerations</h4>
+
+  <p>
+    Entertainment environments often involve dynamic loading, overhead
+    suspension and public safety risks. Inspection, maintenance and competent
+    operation are critical.
+  </p>
+
+<p>
+  <a href="documents/leea_mechanical_inspection_extract.pdf" target="_blank">
+    <button>Open LEEA inspection reference PDF</button>
+  </a>
+</p>
+
+</div>
+
+<!-- PUWER -->
+<div id="puwerInfo" class="outlined" style="display:none;">
+
+  <h3>PUWER 1998</h3>
+
+  <p>
+    The Provision and Use of Work Equipment Regulations 1998 (PUWER)
+    apply to work equipment used in the workplace.
+  </p>
+
+  <h4>Key theatre applications</h4>
+
+  <ul>
+    <li>Curtain tracks</li>
+    <li>Winches</li>
+    <li>Motor controllers</li>
+    <li>Access equipment</li>
+    <li>Portable tools</li>
+    <li>Powered stage machinery</li>
+  </ul>
+
+  <h4>Main requirements</h4>
+
+  <ul>
+    <li>Equipment must be suitable for use.</li>
+    <li>Equipment must be maintained in a safe condition.</li>
+    <li>Users must receive information and training.</li>
+    <li>Dangerous parts must be controlled.</li>
+    <li>Inspections must be carried out where deterioration could create risk.</li>
+  </ul>
+
+  <h4>Theatre considerations</h4>
+
+  <p>
+    PUWER applies broadly across entertainment venues and often overlaps
+    with LOLER where lifting equipment is involved.
+  </p>
+
+<p>
+  <a href="documents/puwer_guidance.pdf" target="_blank">
+    <button>Open PUWER Guidance PDF</button>
+  </a>
+</p>
+
+</div>
+
+<!-- BS EN -->
+<div id="bsInfo" class="outlined" style="display:none;">
+
+  <h3>BS EN 17206</h3>
+
+  <p>
+    BS EN 17206 is the European entertainment technology standard for
+    machinery used in stages and production areas.
+  </p>
+
+  <h4>Key theatre applications</h4>
+
+  <ul>
+    <li>Stage machinery</li>
+    <li>Motorised flying systems</li>
+    <li>Integrated control systems</li>
+    <li>Automated scenery movement</li>
+    <li>Load-bearing entertainment equipment</li>
+  </ul>
+
+  <h4>Main requirements</h4>
+
+  <ul>
+    <li>Risk reduction and safety functions.</li>
+    <li>Control system safety.</li>
+    <li>Prevention of uncontrolled movement.</li>
+    <li>Testing and commissioning.</li>
+    <li>Documentation and inspection requirements.</li>
+  </ul>
+
+  <h4>Theatre considerations</h4>
+
+  <p>
+    BS EN 17206 is highly relevant to modern performance venues using
+    automated or powered entertainment machinery.
+  </p>
+
+<p>
+  <a href="documents/bs_en_17206_summary.pdf" target="_blank">
+    <button>Open BS EN 17206 PDF</button>
+  </a>
+</p>
+
+</div>
+
+<!-- ABTT -->
+<div id="abttInfo" class="outlined" style="display:none;">
+
+  <h3>ABTT Technical Standards</h3>
+
+  <p>
+    ABTT Technical Standards provide recognised UK theatre-industry
+    good practice guidance for places of entertainment.
+  </p>
+
+  <h4>Key theatre applications</h4>
+
+  <ul>
+    <li>Theatre infrastructure</li>
+    <li>Suspension systems</li>
+    <li>Inspection and maintenance procedures</li>
+    <li>Operational safety management</li>
+    <li>Entertainment rigging practice</li>
+  </ul>
+
+  <h4>Main principles</h4>
+
+  <ul>
+    <li>Use competent persons.</li>
+    <li>Maintain inspection records.</li>
+    <li>Follow recognised industry practice.</li>
+    <li>Ensure safe operation and maintenance.</li>
+    <li>Consider venue-specific risks.</li>
+  </ul>
+
+  <h4>Theatre considerations</h4>
+
+  <p>
+    ABTT guidance complements legal duties such as LOLER and PUWER
+    and helps interpret good practice within entertainment environments.
+  </p>
+
+<p>
+  <a href="documents/abtt_technical_standards.pdf" target="_blank">
+    <button>Open ABTT Technical Standards PDF</button>
+  </a>
+</p>
+
+</div>
+</div>
 </body>
 </html>
