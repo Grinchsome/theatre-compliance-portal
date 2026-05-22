@@ -1108,20 +1108,34 @@ regulationGuides: {
           description: "Hall Stage T400 overlap curtain track.", image: "images/hall_t400_overlap_curtain_track.webp",
   hideFromGallery: true },
 
-        { id: "hall_t60_curtain_track", name: "Hall Stage T60 curtain track", category: "Curtain Track", classId: "curtain_track",
-          description: "Hall Stage T60 curtain track system.", image: "images/hall_t60_curtain_track.webp",
-          equipmentInfo: [
-            "Suspension fittings should be spaced at intervals not exceeding 1.5m along the length of the track (manufacturer recommendation).",
-            "Maximum recommended length: 18m for overlapping track and 9m for single tracks.",
-            "Wheeled runners capacity: 20kg. Recommended: one runner per 300mm of curtain length."
-          ],
-          whatToCheck: [
-            "Track is not bent, dented, or twisted.",
-            "Track is level.",
-            "All brackets and suspensions are in good condition (no missing bolts, bent rods, etc.).",
-            "Track sections are firmly bolted together."
-          ]
-        },
+        {
+  id: "hall_t60_curtain_track",
+  name: "Hall Stage T60 curtain track",
+  category: "Curtain Track",
+  classId: "curtain_track",
+  description: "Hall Stage T60 curtain track system.",
+  image: "images/hall_t60_curtain_track.webp",
+
+  equipmentInfo: [
+    "Suspension fittings should be spaced at intervals not exceeding 1.5m along the length of the track (manufacturer recommendation).",
+    "Maximum recommended length: 18m for overlapping track and 9m for single tracks.",
+    "Wheeled runners capacity: 20kg. Recommended: one runner per 300mm of curtain length."
+  ],
+
+  whatToCheck: [
+    "Track is not bent, dented, or twisted.",
+    "Track is level.",
+    "All brackets and suspensions are in good condition (no missing bolts, bent rods, etc.).",
+    "Track sections are firmly bolted together."
+  ],
+
+  documents: [
+  {
+    title: "Hall Stage T60 Technical Datasheet",
+    file: "documents/hall_stage_t60_technical_datasheet.pdf"
+  }
+]
+},
 
         { id: "hall_t70_curtain_track", name: "Hall Stage T70 curtain track", category: "Curtain Track", classId: "curtain_track",
           description: "Hall Stage T70 curtain track system.", image: "images/hall_t70_curtain_track.webp",
@@ -1222,6 +1236,7 @@ function evaluateCompliance(equipmentId, context) {
   description: equipment.description,
   image: equipment.image || null,
   images: equipment.images || [],
+  documents: equipment.documents || [],
   equipmentInfo: equipment.equipmentInfo || [],
   whatToCheck: equipment.whatToCheck || []
 },
@@ -1625,6 +1640,33 @@ container.appendChild(block);
     "This output is guidance only. It summarises how key parts of LOLER, PUWER and BS EN 17206 relate to the selected type of equipment. " +
     "You must still follow manufacturer instructions, local procedures, a suitable and sufficient risk assessment, and any written scheme of examination agreed with a competent person.";
   container.appendChild(disclaimer);
+
+// TECHNICAL DOCUMENTS
+if (result.equipment.documents && result.equipment.documents.length > 0) {
+  var docsBox = document.createElement("div");
+  docsBox.className = "outlined";
+  docsBox.style.marginTop = "1rem";
+
+  var docsTitle = document.createElement("h3");
+  docsTitle.textContent = "📄 Technical data / extra information";
+  docsBox.appendChild(docsTitle);
+
+  result.equipment.documents.forEach(function(doc) {
+    var link = document.createElement("a");
+    link.href = doc.file;
+    link.target = "_blank";
+    link.style.display = "block";
+    link.style.marginBottom = "0.7rem";
+
+    var btn = document.createElement("button");
+    btn.textContent = doc.title;
+
+    link.appendChild(btn);
+    docsBox.appendChild(link);
+  });
+
+  container.appendChild(docsBox);
+}
 
  resultsDiv.appendChild(container);
 }
