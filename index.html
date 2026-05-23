@@ -412,6 +412,7 @@
           <option value="dee_shackles">Dee Shackles</option>
           <option value="safety_bow_shackles">Safety Bow Shackles</option>
           <option value="half_coupler"> Half Coupler</option>
+          <option value="hanging_clamp"> Hanging Clamp with Eye Nut</option>
           <option value="ceiling_saddle">Ceiling Saddle</option>        
           <option value="pipe_hanging_clamp">Pipe Hanging Clamp</option>
           <option value="pipe_wall_bracket">Pipe Wall Bracket</option>
@@ -1014,6 +1015,43 @@ regulationGuides: {
         { id: "half_coupler", name: "Half Coupler", category: "Accessory", classId: "lifting_accessory",
           description: "Half Coupler used to connect tubes, truss or bars in rigging systems.", image: "images/half_coupler.webp" },
 
+{
+  id: "hanging_clamp",
+  name: "Hanging Clamp with Eye Nut",
+  category: "Accessory",
+  classId: "lifting_accessory",
+  description: "Clamp used to create a secure hanging point from a 48-51 mm tube or truss chord. Ideal for trussing as it will not damage the chords.",
+  image: "images/hanging_clamp.webp",
+
+  images: [
+    "images/hanging_clamp.webp",
+    "images/hanging_clamp_2.webp",
+    "images/hanging_clamp_3.webp"
+  ],
+
+  equipmentInfo: [
+    "Used to provide a secure suspension point from a suitable 48-51 mm tube.",
+    "Commonly used for suspending wire-hung loads, lightweight scenic items, signs, drapes, practicals, or other approved rigged items where a rated eye point is required.",
+    "Intended to create a rated eye point for suspended loads.",
+    "Should only be used within its stated WLL/SWL and as part of a properly assessed rigging system."
+  ],
+
+  whatToCheck: [
+    "That the clamp is the correct type and rating for the intended application.",
+    "Confirm that the tube size is suitable, typically 48-51 mm.",
+    "Inspect the clamp body for cracks, distortion, dents, excessive wear, corrosion, or any signs of impact damage.",
+    "Clamp should close properly around the tube and sit squarely without forcing.",
+    "Check clamp is marked or identifiable, and that the rating is known."
+  ],
+
+  documents: [
+    {
+      title: "Hanging Clamp Technical Datasheet",
+      file: "documents/hanging_clamp_datasheet.pdf"
+    }
+  ]
+},
+
         { id: "ceiling_saddle", name: "Ceiling Saddle", category: "Accessory", classId: "lifting_accessory",
           description: "Ceiling saddle used to support bars or pipes from structural members.", image: "images/ceiling_saddle.webp" },
 
@@ -1115,8 +1153,8 @@ regulationGuides: {
   classId: "curtain_track",
   description: "Hall Stage T60 curtain track system.",
   image: "images/hall_t60_curtain_track.webp",
-          
- images: [
+
+  images: [
     "images/hall_t60_curtain_track.webp",
     "images/hall_t60_curtain_track_2.webp",
     "images/hall_t60_curtain_track_3.webp"
@@ -1146,7 +1184,7 @@ regulationGuides: {
         { id: "hall_t70_curtain_track", name: "Hall Stage T70 curtain track", category: "Curtain Track", classId: "curtain_track",
           description: "Hall Stage T70 curtain track system.", image: "images/hall_t70_curtain_track.webp",
 
-          images: [
+  images: [
     "images/hall_t70_curtain_track.webp",
     "images/hall_t70_curtain_track_2.webp",
     "images/hall_t70_curtain_track_3.webp"
@@ -1170,8 +1208,7 @@ regulationGuides: {
   }
 ]
 },
-
-
+        
         { id: "hall_t60_overlap_curtain_track", name: "Hall Stage T60 overlap curtain track", category: "Curtain Track", classId: "curtain_track",
           description: "Hall Stage T60 overlap curtain track.", image: "images/hall_t60_overlap_curtain_track.webp",
   hideFromGallery: true },
@@ -1207,19 +1244,14 @@ regulationGuides: {
         { id: "bar_48mm_plain_steel", name: "48mm OD Plain Steel Bar", category: "Lighting Bar", classId: "structural_support",
           description: "48mm diameter plain steel lighting or suspension bar.", image: "images/bar_48mm_plain_steel.webp" },
 
-       {
-  id: "bar_48mm_plain_aluminium",
-  name: "48mm OD Plain Aluminium Bar",
-  category: "Lighting Bar",
-  classId: "structural_support",
-  description: "48mm diameter plain aluminium lighting bar.",
-  image: "images/bar_48mm_plain_aluminium.webp",
+        { id: "bar_48mm_plain_aluminium", name: "48mm OD Plain Aluminium Bar", category: "Lighting Bar", classId: "structural_support",
+          description: "48mm diameter plain aluminium lighting bar.", image: "images/bar_48mm_plain_aluminium.webp",
 
-  images: [
+images: [
     "images/bar_48mm_plain_aluminium.webp",
     "images/bar_48mm_plain_aluminium_2.webp",
     "images/bar_48mm_plain_aluminium_3.webp"
- ],
+    ],
 
   documents: [
   {
@@ -1231,7 +1263,6 @@ regulationGuides: {
 
       ]
     };
-
 
 /****************************************************
  * HELPERS
