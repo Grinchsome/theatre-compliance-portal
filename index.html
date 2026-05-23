@@ -411,8 +411,9 @@
           <option value="bow_shackles">Bow Shackles</option>
           <option value="dee_shackles">Dee Shackles</option>
           <option value="safety_bow_shackles">Safety Bow Shackles</option>
-          <option value="half_coupler"> Half Coupler</option>
-          <option value="hanging_clamp"> Hanging Clamp with Eye Nut</option>
+          <option value="half_coupler">Half Coupler</option>
+          <option value="hanging_clamp">Hanging Clamp with Eye Nut</option>
+          <option value="hanging_clamp_with_pink_eye">Hanging Clamp with Pink Eye</option>
           <option value="ceiling_saddle">Ceiling Saddle</option>        
           <option value="pipe_hanging_clamp">Pipe Hanging Clamp</option>
           <option value="pipe_wall_bracket">Pipe Wall Bracket</option>
@@ -1020,7 +1021,7 @@ regulationGuides: {
   name: "Hanging Clamp with Eye Nut",
   category: "Accessory",
   classId: "lifting_accessory",
-  description: "Clamp used to create a secure hanging point from a 48-51 mm tube or truss chord. Ideal for trussing as it will not damage the chords.",
+  description: "Used to create a secure hanging point from a 48-51 mm tube or truss chord. Ideal for trussing as it will not damage the chords.",
   image: "images/hanging_clamp.webp",
 
   images: [
@@ -1052,6 +1053,43 @@ regulationGuides: {
   ]
 },
 
+{
+  id: "hanging_clamp_with_pink_eye",
+  name: "Hanging Clamp with Pink Eye",
+  category: "Accessory",
+  classId: "lifting_accessory",
+  description: "Used to create a secure hanging point accommodating less favourable load directions. Commonly used for suspending wire-hung loads, scenic items, signs, drapes, practicals, loudspeakers, or other approved rigged items where a rated eye point is required.",
+  image: "images/hanging_clamp_with_pink_eye.webp",
+
+  images: [
+    "images/hanging_clamp_with_pink_eye.webp",
+    "images/hanging_clamp_with_pink_eye_2.webp",
+    "images/hanging_clamp_with_pink_eye_3.webp"
+  ],
+
+  equipmentInfo: [
+    "Used to provide a secure suspension point from a suitable 48-51 mm tube.",
+    "Commonly used for suspending wire-hung loads, lightweight scenic items, signs, drapes, practicals, or other approved rigged items where a rated eye point is required.",
+    "Intended to create a rated eye point for suspended loads.",
+    "Should only be used within its stated WLL/SWL and as part of a properly assessed rigging system.",
+    "Unlike standard eye nut, articulated Pink Eyes accommodate less favourable load directions when used correctly."
+  ],
+
+  whatToCheck: [
+    "That the clamp is the correct type and rating for the intended application.",
+    "Confirm that the tube size is suitable, typically 48-51 mm.",
+    "Inspect the clamp body for cracks, distortion, dents, excessive wear, corrosion, or any signs of impact damage.",
+    "Clamp should close properly around the tube and sit squarely without forcing.",
+    "Check clamp is marked or identifiable, and that the rating is known."
+  ],
+
+  documents: [
+    {
+      title: "Hanging Clamp with Pink Eye Technical Datasheet",
+      file: "documents/hanging_clamp_with_pink_eye_datasheet.pdf"
+    }
+  ]
+},
         { id: "ceiling_saddle", name: "Ceiling Saddle", category: "Accessory", classId: "lifting_accessory",
           description: "Ceiling saddle used to support bars or pipes from structural members.", image: "images/ceiling_saddle.webp" },
 
@@ -1208,7 +1246,8 @@ regulationGuides: {
   }
 ]
 },
-        
+
+
         { id: "hall_t60_overlap_curtain_track", name: "Hall Stage T60 overlap curtain track", category: "Curtain Track", classId: "curtain_track",
           description: "Hall Stage T60 overlap curtain track.", image: "images/hall_t60_overlap_curtain_track.webp",
   hideFromGallery: true },
