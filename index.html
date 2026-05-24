@@ -8,7 +8,9 @@
 <style>
   :root{
     --bg:#f6f8fa;
-    --surface:#ffffff;@media (min-width: 900px)
+    --surface:#ffffff;
+    --text:#1f2328;
+    --muted:#667085;
     --border:#d0d7de;
     --shadow:0 10px 22px rgba(0,0,0,0.08);
     --primary:#005a8f;
@@ -357,7 +359,7 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    linear-gradient(rgba(255,255,255,0.62), rgba(255,255,255,0.62)),
+    linear-gradient(rgba(255,255,255,0.45), rgba(255,255,255,0.45)),
     url("images/portal_background.webp");
   background-size: cover;
   background-position: center;
@@ -514,12 +516,12 @@ button,
     font-size: 1.8rem;
   }
 
- .card {
+  .card {
     max-width: 1000px;
     margin: 2rem auto;
     padding: 0.75rem 1.5rem;
     border-radius: 20px;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.85);
   }
 
 [data-theme="dark"] .card {
